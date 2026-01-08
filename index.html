@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re:Voice - 新しい人事戦略プログラム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: url('sakura-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            color: #1a1a1a;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partnership-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 0 auto 40px;
+            flex-wrap: wrap;
+        }
+
+        .partnership-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .partnership-logo.sli-logo {
+            height: 60px;
+        }
+
+        .partnership-logo.ai-story-logo {
+            height: 100px;
+        }
+
+        .partnership-logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .partnership-separator {
+            font-size: 2em;
+            color: #ccc;
+            font-weight: 300;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+            color: #1a1a1a;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 2;
+            color: #333;
+        }
+
+        /* Section */
+        section {
+            padding: 60px 40px;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1a1a1a;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        /* Message Section */
+        .message {
+            background: #FFE8F0;
+        }
+
+        .message-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.05em;
+            line-height: 2.2;
+        }
+
+        .message-content p {
+            margin-bottom: 20px;
+        }
+
+        /* Program Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #e60012;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-size: 1.5em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .step-subtitle {
+            font-size: 1.1em;
+            color: #e60012;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .step-content h4 {
+            color: #1a1a1a;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .step-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-content li {
+            padding-left: 20px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .step-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-weight: bold;
+        }
+
+        /* Team Section */
+        .team {
+            background: #f8f9fa;
+        }
+
+        .team-grid {
+            display: grid;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .team-member-header {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center 20%;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .team-photo.sezaki-photo {
+            width: 180px;
+            height: 180px;
+            background-size: 160%;
+            background-position: 20% 35%;
+        }
+
+        .team-name {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .team-role {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .team-content {
+            padding: 35px;
+        }
+
+        .team-profile {
+            margin-bottom: 30px;
+        }
+
+        .profile-title {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            font-weight: 700;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e60012;
+        }
+
+        .profile-text {
+            font-size: 0.95em;
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .team-interview {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #e60012;
+        }
+
+        .interview-title {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .interview-text {
+            font-size: 1.05em;
+            line-height: 2;
+            color: #333;
+        }
+
+        .interview-quote {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #1a1a1a;
+            border-left: 3px solid #e60012;
+            font-size: 1.05em;
+            line-height: 1.9;
+            position: relative;
+        }
+
+        /* Schedule */
+        .schedule-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-month {
+            min-width: 150px;
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            position: relative;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #e60012;
+        }
+
+        .timeline-content h4 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-content li {
+            padding-left: 20px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .timeline-content li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #e60012;
+        }
+
+        /* NET*ASK Section */
+        .netask {
+            background: #fff;
+        }
+
+        .netask-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .netask-intro {
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 2;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .netask-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .netask-feature {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #e60012;
+        }
+
+        .netask-feature h4 {
+            color: #1a1a1a;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .netask-feature p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, #D81B60 0%, #AD1457 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .cta h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-month {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media print {
+            .container {
+                max-width: 100%;
+            }
+
+            .step-card,
+            .team-member {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Password Protection Overlay -->
+    <div id="password-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; z-index: 10000;">
+        <div
+            style="background: white; padding: 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%;">
+            <div style="margin-bottom: 30px;">
+                <h2 style="color: #1a1a1a; font-size: 2em; margin-bottom: 10px;">🔒 社員専用ページ</h2>
+                <p style="color: #666; font-size: 1em;">パスワードを入力してください</p>
+            </div>
+            <input type="password" id="password-input" placeholder="パスワードを入力"
+                style="width: 100%; padding: 15px; font-size: 1.1em; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box; font-family: inherit;"
+                onkeypress="if(event.key==='Enter') checkPassword()">
+            <button onclick="checkPassword()"
+                style="width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 1.1em; font-weight: 700; cursor: pointer; transition: transform 0.2s;">アクセス</button>
+            <p id="error-message" style="color: #e60012; margin-top: 15px; font-size: 0.9em; display: none;">
+                パスワードが正しくありません</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple password protection (Note: Not cryptographically secure, suitable for basic access control)
+        const correctPasswordHash = '3a5f8d9e7c1b4a2f6e8d9c7b5a3f1e9d'; // Hash of 'sli2026'
+
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(32, '0');
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-message');
+
+            if (input === 'sli2026') {
+                document.getElementById('password-overlay').style.display = 'none';
+                sessionStorage.setItem('authenticated', 'true');
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+
+        // Check if already authenticated in this session
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            document.getElementById('password-overlay').style.display = 'none';
+        } else {
+            document.getElementById('password-input').focus();
+        }
+    </script>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="partnership-logos">
+                    <div class="partnership-logo sli-logo">
+                        <img src="sli-logo-new.png" alt="SLI CO.,LTD.">
+                    </div>
+                    <div class="partnership-separator">×</div>
+                    <div class="partnership-logo ai-story-logo">
+                        <img src="ai-story-logo.png" alt="Ai story">
+                    </div>
+                </div>
+                <h1>話せるから、整う。<br>整うから、進める。</h1>
+                <p class="hero-subtitle">Re:Voice project</p>
+                <p class="hero-description">
+                    適性診断と1on1で、評価ではなく「自分らしい力の出し方」を見つける4ヵ月。
+                </p>
+            </div>
+        </div>
+
+        <!-- Message Section -->
+        <section class="message">
+            <h2 class="section-title">社員のみなさまへ</h2>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <p style="font-size: 1.1em; color: #555; margin-bottom: 5px;">株式会社Ai story</p>
+                <p style="font-size: 1.3em; font-weight: 700; color: #1a1a1a;">代表取締役社長 瀬崎 成美</p>
+            </div>
+            <div class="message-content">
+                <p>コンサートやイベントなどさまざまな空間づくり、感動の創出に関わってこられた皆さんは、技術はもちろんのこと、限られた時間や範囲の中で、その場に合わせた判断や工夫を重ねながら仕事をされてきたプロフェッショナルだと感じています。そんな皆様とお話できることを心待ちにしています。
+                </p>
+
+                <p>今回の適性診断やキャリア面談は、皆さんを評価したり、会社のために何かを引き出すためのものではありません。日々の仕事の中で感じていることや、続けていく中で生まれる迷いや違和感を、安心して言葉にできる時間をつくることを大切にしています。
+                </p>
+
+                <p>一人ひとりが、自分らしい力の出し方で働き続けられること。このプロジェクトは、そうした状態をどうすればつくれるのかを、皆さんの声をもとに考えていくためのものです。</p>
+
+                <p>結果として、それが職場の安心感や働きやすさにつながり、チームとしての力が自然に高まっていく。私たちは、そんな循環を大切にしたいと考えています。</p>
+
+                <p>面談では、話がまとまっていなくても構いません。前向きな結論が出ていなくても大丈夫です。今感じていることを、そのまま話してもらえたら十分です。</p>
+
+                <p>このプロジェクトには、柴田、岡田、そして瀬崎の3人で関わります。それぞれ皆さんが安心して話せる場をつくることを共通の軸にしています。気負わず、いつも通りで大丈夫です。お話しできること、楽しみにしています。
+                </p>
+            </div>
+        </section>
+
+        <!-- Program Steps -->
+        <section>
+            <h2 class="section-title">プログラムの流れ</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">聴く・調べる</h3>
+                    <p class="step-subtitle">課題抽出</p>
+                    <div class="step-content">
+                        <h4>実施内容</h4>
+                        <ul>
+                            <li>社員全員と1対1の面談を実施</li>
+                            <li>社員全員の適性診断を実施</li>
+                        </ul>
+                        <h4>得られる未来</h4>
+                        <ul>
+                            <li>社員自身の自己理解→強みや対策が分かる</li>
+                            <li>管理者の部下理解→対応方法、配置が分かる</li>
+                            <li>社員と管理職の"本音"を聞く→課題が明らかに</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">環境をつくる</h3>
+                    <p class="step-subtitle">分析・作戦</p>
+                    <div class="step-content">
+                        <h4>実施内容</h4>
+                        <ul>
+                            <li>適性診断結果を集計・分析レポート作成</li>
+                            <li>各部長と個別マネジメント戦略会議を実施</li>
+                        </ul>
+                        <h4>得られる未来</h4>
+                        <ul>
+                            <li>分析レポート→属人的な感覚ではない判断基準が生まれる</li>
+                            <li>個別戦略会議→社員の特性に合わせた具体的なマネジメント計画</li>
+                            <li>分析レポート→早急な対応から採用まで行動が明確に</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">実行・成長</h3>
+                    <p class="step-subtitle">実施検証</p>
+                    <div class="step-content">
+                        <h4>実施内容</h4>
+                        <ul>
+                            <li>総括報告（面談・適性検査・会議）・検証</li>
+                            <li>ネクストアクションのご提案</li>
+                        </ul>
+                        <h4>得られる未来</h4>
+                        <ul>
+                            <li>総括報告・検証→実施、検証することで改善/定着へ</li>
+                            <li>ネクストアクション→成長フェーズに合わせて次の一歩を明確に</li>
+                            <li>総括報告・検証→会社全体で把握し施策を検討</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NET*ASK Section -->
+        <section class="netask">
+            <h2 class="section-title">適性診断について</h2>
+            <div class="netask-content">
+                <div class="netask-intro">
+                    <p>本プログラムでは、<strong>NET*ASK（ネットアスク）</strong>という適性診断を使用します。</p>
+                    <p>NET*ASKは、一人ひとりの特性や強みを客観的に理解するための診断ツールです。</p>
+                </div>
+
+                <div class="netask-features">
+                    <div class="netask-feature">
+                        <h4>潜在的なモチベーション</h4>
+                        <p>何に対してやる気を感じやすいか、どのような環境で力を発揮しやすいかを把握します。</p>
+                    </div>
+
+                    <div class="netask-feature">
+                        <h4>ストレス耐性</h4>
+                        <p>ストレスを感じやすい場面や、その対処方法のヒントが得られます。</p>
+                    </div>
+
+                    <div class="netask-feature">
+                        <h4>職種の適性</h4>
+                        <p>現在の業務との相性や、今後のキャリアを考える際の参考情報が分かります。</p>
+                    </div>
+
+                    <div class="netask-feature">
+                        <h4>協調性</h4>
+                        <p>チームでの働き方や、他者との関わり方の傾向が明らかになります。</p>
+                    </div>
+
+                    <div class="netask-feature">
+                        <h4>責任感</h4>
+                        <p>仕事への向き合い方や、責任を持って取り組む姿勢について理解が深まります。</p>
+                    </div>
+
+                    <div class="netask-feature">
+                        <h4>トラブル要因の程度</h4>
+                        <p>注意が必要な場面や、事前に配慮できることが分かります。</p>
+                    </div>
+                </div>
+
+                <div class="netask-intro" style="margin-top: 40px;">
+                    <p style="color: #e60012; font-weight: 600;">この診断結果は、皆さん自身の自己理解を深めるためのものです。</p>
+                    <p>評価や選別のためではなく、より良い働き方や職場環境を一緒に考えていくための材料として活用します。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <h2 class="section-title">面談担当メンバー</h2>
+            <div class="team-grid">
+                <!-- 瀬崎成美 -->
+                <div class="team-member">
+                    <div class="team-member-header">
+                        <div class="team-photo sezaki-photo" style="background-image: url('team-photo-sezaki.png');">
+                        </div>
+                        <h3 class="team-name">瀬崎 成美</h3>
+                        <p class="team-role">せざき なるみ / プロジェクト統括</p>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-profile">
+                            <h4 class="profile-title">プロフィール</h4>
+                            <p class="profile-text">
+                                熊本県出身。新卒で鉄道会社に入社し、営業・運輸・財務部門を経験。結婚・出産・育休復職などライフイベントを経て働き方への違和感から「後悔したくない」と自分の生き方・働き方を見直す決断。「本音で話せる場がほしかった」という原体験から、組織の中に"相談できる仕組み"を届けたいと創業。国家資格キャリアコンサルタント取得、150名以上との対話経験をもとに、個人支援と組織支援の両軸で活動中。
+                            </p>
+                        </div>
+                        <div class="team-interview">
+                            <h4 class="interview-title">面談へのスタンス</h4>
+                            <p class="interview-text">
+                                本プロジェクト全体の統括を行いながら、社員の皆さんとの個別面談も担当します。これまで、働く人一人ひとりの声を丁寧に聞き、その想いや背景を、組織のこれからにつなげる支援に取り組んできました。面談では、「何を話すか」よりも「安心して話せること」を大切にしています。仕事のことだけでなく、日々感じていることや迷いも含めて、無理にまとめなくて大丈夫な時間です。
+                            </p>
+                            <div class="interview-quote">
+                                立場や役割に関係なく、一人の人として安心して話してもらえる場をつくりたいと思っています。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 柴田真 -->
+                <div class="team-member">
+                    <div class="team-member-header">
+                        <div class="team-photo" style="background-image: url('team-photo-shibata.png');"></div>
+                        <h3 class="team-name">柴田 真</h3>
+                        <p class="team-role">しばた しん / サポートメンバー</p>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-profile">
+                            <h4 class="profile-title">プロフィール</h4>
+                            <p class="profile-text">
+                                従業員数55,000名の上場企業で約10年間、HRBP（人事）として新卒採用、人材育成、人事評価、労務管理など多岐にわたる領域を経験。拠点の人事総務責任者として経営陣とともに人事KPIのマネジメントにも従事。国家資格キャリアコンサルタント取得後、キャリアの成長支援のプロフェッショナルを志すようになり、現在も国際コーチング連盟の認定資格取得に向け学習を継続中。
+                            </p>
+                        </div>
+                        <div class="team-interview">
+                            <h4 class="interview-title">面談へのスタンス</h4>
+                            <p class="interview-text">
+                                これまで人事の立場として、多くの社員や現場と向き合ってきました。物事を整理しながら考えることや、対話を通じて気づきを引き出す関わりを得意としています。面談では、今感じていることや考えを一緒に整理しながら、「自分はどうしたいのか」「何が大切なのか」を言葉にしていく時間を大切にします。
+                            </p>
+                            <div class="interview-quote">
+                                答えを出す場ではなく、一緒に考え、整理する時間にしたいと思っています。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 岡田彩 -->
+                <div class="team-member">
+                    <div class="team-member-header">
+                        <div class="team-photo" style="background-image: url('team-photo-okada.png');"></div>
+                        <h3 class="team-name">岡田 彩</h3>
+                        <p class="team-role">おかだ あや / サポートメンバー</p>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-profile">
+                            <h4 class="profile-title">プロフィール</h4>
+                            <p class="profile-text">
+                                医療職（診療放射線技師）からキャリアチェンジし、現在は若年層を中心にキャリア支援を行うキャリアコンサルタント（国家資格・NET診断スペシャリスト2級）。大学・専門学校でのキャリアガイダンスや個別面談、企業向け新入社員研修、インターンシップ支援など幅広く活動。近年はキャリア支援者のコミュニティ運営や企業・地域と連携したイベント企画など、人と人がつながる"場づくり"にも注力。多様な経験と柔軟な対応力、丁寧な傾聴力を活かした支援を大切にしている。
+                            </p>
+                        </div>
+                        <div class="team-interview">
+                            <h4 class="interview-title">面談へのスタンス</h4>
+                            <p class="interview-text">
+                                これまで、さまざまな立場の方の話を丁寧に聞く支援に携わってきました。医療職からキャリアを変えた経験もあり、不安や迷いの中にいる気持ちに寄り添うことを大切にしています。面談では、うまく言葉にできなくても大丈夫です。その時々の気持ちを、そのまま話してもらえるような、やわらかな対話を心がけています。
+                            </p>
+                            <div class="interview-quote">
+                                話すことで少し気持ちが軽くなる、そんな時間になればと思っています。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule -->
+        <section>
+            <h2 class="section-title">4ヶ月のスケジュール</h2>
+            <div class="schedule-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-month">1ヶ月目</div>
+                    <div class="timeline-content">
+                        <h4>現状把握</h4>
+                        <ul>
+                            <li>面談実施</li>
+                            <li>適性検査実施</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-month">2ヶ月目</div>
+                    <div class="timeline-content">
+                        <h4>課題抽出</h4>
+                        <ul>
+                            <li>面談実施</li>
+                            <li>分析レポート作成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-month">3ヶ月目</div>
+                    <div class="timeline-content">
+                        <h4>具体的なアプローチ</h4>
+                        <ul>
+                            <li>各部長との戦略会議実施</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-month">4ヶ月目</div>
+                    <div class="timeline-content">
+                        <h4>振返り・行動</h4>
+                        <ul>
+                            <li>総括報告</li>
+                            <li>経営計画反映</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LINE Announcement Section -->
+        <section
+            style="background: linear-gradient(135deg, #06c755 0%, #00b900 100%); color: white; text-align: center; padding: 50px 40px;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2em; margin-bottom: 20px; font-weight: 700;">📱 相談窓口 公式LINE</h2>
+                <p style="font-size: 1.3em; margin-bottom: 15px; line-height: 1.8;">まもなく開設します!</p>
+                <p style="font-size: 1.1em; line-height: 1.9; opacity: 0.95;">
+                    気軽に相談できる窓口として、公式LINEアカウントを準備しています。<br>
+                    日々の小さな疑問や相談も、いつでもお気軽にお寄せください。
+                </p>
+            </div>
+        </section>
+
+        <!-- CEO Message Section -->
+        <section style="background: #f8f9fa; padding: 60px 40px;">
+            <h2 class="section-title">代表取締役からのメッセージ</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <p style="font-size: 1.1em; color: #555; margin-bottom: 5px;">株式会社SLI</p>
+                    <p style="font-size: 1.3em; font-weight: 700; color: #1a1a1a;">代表取締役 井上 忠</p>
+                </div>
+                <div
+                    style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid #667eea;">
+                    <p style="font-size: 1.05em; line-height: 2.2; margin-bottom: 20px; color: #333;">
+                        このRe:Voiceプロジェクトは、当社にとって大きな一歩となる取り組みです。
+                    </p>
+                    <p style="font-size: 1.05em; line-height: 2.2; margin-bottom: 20px; color: #333;">
+                        私たちは長年、お客様に最高の体験を提供することを使命として事業を展開してきました。しかし、それを実現し続けるためには、まず社員一人ひとりが安心して働ける環境、自分らしさを発揮できる場が必要不可欠だと考えています。
+                    </p>
+                    <p style="font-size: 1.05em; line-height: 2.2; margin-bottom: 20px; color: #333;">
+                        今回、株式会社Ai storyの瀬崎さんをはじめとする専門家の皆さんと協力し、社員の声に真摯に耳を傾け、組織として成長していく機会をいただきました。
+                    </p>
+                    <p style="font-size: 1.05em; line-height: 2.2; margin-bottom: 20px; color: #333;">
+                        このプロジェクトを通じて、皆さんと共に、より良い職場環境を築き、一人ひとりが誇りを持って働き続けられる会社を目指していきます。皆さんの率直な声をお聞かせください。
+                    </p>
+                    <p
+                        style="font-size: 1.1em; line-height: 2; color: #667eea; font-weight: 600; font-style: italic; margin-top: 30px; text-align: center;">
+                        共に、未来をつくっていきましょう。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <h3>人材価値の最大化 → 企業価値UP</h3>
+            <p>一人ひとりの声が、未来をつくる</p>
+        </div>
+    </div>
+</body>
+
+</html>
